@@ -27,6 +27,8 @@ file_env() {
 cd "${WEB_DOCUMENT_ROOT}"
 
 if [ ! -f ".RELEASE_${LIMESURVEY_GIT_RELEASE}" ]; then
+    compgen -G ".RELEASE_*" && rm .RELEASE_*
+
     echo >&2 "Retrieving LimeSurvey... "
     curl -sSL "https://github.com/LimeSurvey/LimeSurvey/archive/${LIMESURVEY_GIT_RELEASE}.tar.gz" -o "/tmp/lime.tar.gz"
 
@@ -41,6 +43,8 @@ if [ ! -f ".RELEASE_${LIMESURVEY_GIT_RELEASE}" ]; then
         xargs -I {} touch -t 195001010000 {}
     
     rm /tmp/lime.tar.gz
+
+    touch ".RELEASE_${LIMESURVEY_GIT_RELEASE}"
 fi
 
 file_env 'LIMESURVEY_DB_TYPE' 'mysql'
