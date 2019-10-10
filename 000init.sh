@@ -195,7 +195,7 @@ if ($inst->num_rows > 0) {
 }
 
 EOPHP
-) >/dev/null
+) &>/dev/null
 
 # cd application/commands/
 if [ "${DBSTATUS}" != "DBEXISTS" ] &&  [ -n "${LIMESURVEY_ADMIN_USER}" ] && [ -n "${LIMESURVEY_ADMIN_PASSWORD}" ]; then
