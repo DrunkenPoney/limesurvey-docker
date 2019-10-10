@@ -26,7 +26,7 @@ file_env() {
 
 cd "${WEB_DOCUMENT_ROOT}"
 
-if [ ! -f ".RELEASE_${LIMESURVEY_GIT_RELEASE}" ]; then
+if [ ! -f ".RELEASE_${LIMESURVEY_GIT_RELEASE}" ] || [ "${LIMESURVEY_FORCE_FETCH}" == "1" ]; then
     compgen -G ".RELEASE_*" && rm .RELEASE_*
 
     echo >&2 "Retrieving LimeSurvey... "
@@ -34,13 +34,13 @@ if [ ! -f ".RELEASE_${LIMESURVEY_GIT_RELEASE}" ]; then
 
     echo >&2 'Extracting files from archive...'
     tar -xzf /tmp/lime.tar.gz \
-        --group=application \
-        --owner=application \
         --strip-components=1 \
         --keep-newer-files \
         --exclude-vcs \
         --to-command="sh -c $(printf '%q' 'mkdir -p $(dirname "./$TAR_FILENAME") && touch "./$TAR_FILENAME" && dd of="./$TAR_FILENAME" >/dev/null 2>&1 && echo "./$TAR_FILENAME" ')" | \
         xargs -I {} touch -t 195001010000 {}
+    
+    chown -R application:application .
     
     rm /tmp/lime.tar.gz
 

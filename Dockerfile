@@ -1,6 +1,7 @@
 FROM webdevops/php-apache
 
 ENV LIMESURVEY_GIT_RELEASE 2.05_plus_141123
+ENV LIMESURVEY_FORCE_FETCH 0
 
 RUN phpenmod imap 
 
