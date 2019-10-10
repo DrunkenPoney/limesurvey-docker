@@ -3,7 +3,7 @@ version: '2'
 services:
 
   limesurvey:
-    image: acspri/limesurvey:3.17.10
+    image: drunkenponey/limesurvey:latest
     ports:
       - 8082:80
     environment:

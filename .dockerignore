@@ -1,7 +1,3 @@
-
-docker-compose.yml
-mysql
-README.md
-upload
-windows
-
+*
+!Dockerfile
+!000init.sh
